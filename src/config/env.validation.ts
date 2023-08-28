@@ -24,6 +24,9 @@ class EnvironmentVariables {
 
   @IsString()
   IQAIR_API_URL: string;
+
+  @IsString()
+  IQAIR_API_VERSION: string;
 }
 
 export const ValidateConfigurationEnvironment = (

@@ -9,5 +9,6 @@ export default () => ({
   iqair: {
     apiKey: process.env.IQAIR_API_KEY,
     apiUrl: process.env.IQAIR_API_URL,
+    apiVersion: process.env.IQAIR_API_VERSION,
   },
 });
