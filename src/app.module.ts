@@ -5,6 +5,7 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import configuration from './config/configuration';
 import { ValidateConfigurationEnvironment } from './config/env.validation';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
   imports: [
@@ -12,6 +13,13 @@ import { ValidateConfigurationEnvironment } from './config/env.validation';
       load: [configuration],
       validate: ValidateConfigurationEnvironment,
       isGlobal: true,
+    }),
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        uri: configService.get<string>('db.uri'),
+      }),
     }),
     ScheduleModule.forRoot(),
   ],
