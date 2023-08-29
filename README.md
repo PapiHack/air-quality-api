@@ -103,7 +103,7 @@ docker-compose up -d
 
 For cleaning your environment, you can run :
 ```bash
-docker-compose -f src/main/docker/app.yaml down
+docker-compose down
 ```
 
 ### Tests Results
