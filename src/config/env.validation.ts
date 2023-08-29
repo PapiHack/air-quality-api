@@ -27,6 +27,12 @@ class EnvironmentVariables {
 
   @IsString()
   IQAIR_API_VERSION: string;
+
+  @IsNumber()
+  HTTP_TIMEOUT: number;
+
+  @IsNumber()
+  HTTP_MAX_REDIRECTS: number;
 }
 
 export const ValidateConfigurationEnvironment = (

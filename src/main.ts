@@ -11,12 +11,22 @@ async function bootstrap() {
   app.enableCors({
     origin: '*',
   });
-  app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      transform: true,
+      transformOptions: { enableImplicitConversion: true },
+    }),
+  );
   const config = new DocumentBuilder()
     .setTitle('Yassir - Air Quality')
     .setDescription('The Air Quality API powered by Yassir (Coding Challenge)')
     .setVersion('1.0')
-    .setContact('Meïssa B.C MBAYE', 'https://www.linkedin.com/in/meissa-bc-mbaye', 'mssmbaye@gmail.com')
+    .setContact(
+      'Meïssa B.C MBAYE',
+      'https://www.linkedin.com/in/meissa-bc-mbaye',
+      'mssmbaye@gmail.com',
+    )
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, document);

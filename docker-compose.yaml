@@ -6,7 +6,7 @@ services:
     env_file:
       - .env
     ports:
-      - 27017:27017
+      - 27027:27017
     volumes:
       - airquality_data_container:/data/db
 
@@ -19,7 +19,7 @@ services:
     env_file:
       - .env
     environment:
-      - MONGO_URI=mongodb://mongodb:27017/air-quality
+      - MONGO_URI=mongodb://mongodb:27027/air-quality
     depends_on:
       - mongodb
 
