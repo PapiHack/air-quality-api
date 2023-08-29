@@ -1,27 +1,25 @@
-version: '3.8'
+version: '3.3'
 services:
   mongodb:
     image: mongo:latest
-    container_name: air-quality-db
-    env_file:
-      - .env
+    container_name: yassir-air-quality-db
     ports:
-      - 27017:27017
+      - 27027:27017
     volumes:
-      - airquality_data_container:/data/db
+      - yassir_airquality_data_container:/data/db
 
   api: 
     build: .
-    container_name: air-quality-api
+    container_name: yassir-air-quality-api
     ports:
       - ${PORT}:${PORT}
     command: npm run start:dev
     env_file:
       - .env
     environment:
-      - MONGO_URI=mongodb://mongodb:27017/air-quality
+      - MONGO_URI=mongodb://mongodb:27017/yassir-air-quality
     depends_on:
       - mongodb
 
 volumes:
-  airquality_data_container:
+  yassir_airquality_data_container:

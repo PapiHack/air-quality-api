@@ -11,4 +11,8 @@ export default () => ({
     apiUrl: process.env.IQAIR_API_URL,
     apiVersion: process.env.IQAIR_API_VERSION,
   },
+  http: {
+    timeout: process.env.HTTP_TIMEOUT,
+    maxRedirects: process.env.HTTP_MAX_REDIRECTS,
+  },
 });
