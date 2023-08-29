@@ -29,5 +29,6 @@ import { CronJobsModule } from './modules/cron-jobs/cron-jobs.module';
   ],
   controllers: [AppController],
   providers: [AppService, ConfigService],
+  exports: [MongooseModule],
 })
 export class AppModule {}

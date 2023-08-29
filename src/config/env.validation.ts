@@ -33,6 +33,9 @@ class EnvironmentVariables {
 
   @IsNumber()
   HTTP_MAX_REDIRECTS: number;
+
+  @IsString()
+  API_PREFIX: string;
 }
 
 export const ValidateConfigurationEnvironment = (

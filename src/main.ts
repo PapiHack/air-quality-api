@@ -7,7 +7,8 @@ import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService);
-  const port = configService.get('port');
+  const port = configService.get<number>('port');
+  app.setGlobalPrefix(configService.get<string>('api.prefix'));
   app.enableCors({
     origin: '*',
   });
@@ -19,7 +20,7 @@ async function bootstrap() {
     }),
   );
   const config = new DocumentBuilder()
-    .setTitle('Yassir - Air Quality')
+    .setTitle('Yassir - Air Quality REST API')
     .setDescription('The Air Quality API powered by Yassir (Coding Challenge)')
     .setVersion('1.0')
     .setContact(

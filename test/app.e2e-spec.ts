@@ -21,4 +21,36 @@ describe('AppController (e2e)', () => {
       .expect(200)
       .expect('Hello World!');
   });
+
+  it('/api (GET)', () => {
+    return request(app.getHttpServer())
+      .get('/api')
+      .expect(404);
+  });
+
+  it('/api/health-check (GET)', () => {
+    return request(app.getHttpServer())
+      .get('/health-check')
+      .expect(200)
+      .expect({ message: 'Service is healthy !' });
+  });
+
+  it('/api/air-quality/zone (GET)', () => {
+    return request(app.getHttpServer())
+      .get('/health-check')
+      .expect(200)
+      .expect({ message: 'Service is healthy !' });
+  });
+
+  it('/api/air-quality/paris/most-polluted-time (GET)', () => {
+    return request(app.getHttpServer())
+      .get('/air-quality/paris/most-polluted-time')
+      .expect(200);
+  });
+
+  it('/api/air-quality/paris (GET)', () => {
+    return request(app.getHttpServer())
+      .get('/air-quality/paris/most-polluted-time')
+      .expect(200);
+  });
 });

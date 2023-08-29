@@ -1,10 +1,10 @@
 import { Injectable, Logger } from '@nestjs/common';
+import { Cron } from '@nestjs/schedule';
 import { AirQualityService } from '../air-quality/air-quality.service';
 import {
   AirQualityByZoneDTO,
   AirQualityZoneResultDTO,
 } from '../air-quality/dtos/air-quality.dto';
-import { Cron } from '@nestjs/schedule';
 
 const PARIS_ZONE = {
   latitude: 48.856613,

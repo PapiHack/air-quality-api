@@ -1,73 +1,136 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Air Quality Assessment
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+The goal of this project is to create a REST API responsible for exposing “the air
+quality information” of a nearest city to GPS coordinates using [iqair](https://www.iqair.com/fr/commercial/air-quality-monitors/airvisual-platform/api).
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Technical Stack
 
-## Description
+Regarding the stack, you'll find:
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- [Nest.js](https://nestjs.com) A progressive Node.js framework for building efficient, reliable and scalable server-side applications.
 
-## Installation
+- [MongoDB](https://www.mongodb.com) for the database.
 
+- [Mongoose](https://mongoosejs.com) an elegant mongodb object modeling for node.js, as our Object Document Mapper. 
+
+- [Jest](https://jestjs.io) for unit tests.
+
+- [SuperTest](https://github.com/ladjs/supertest) for integration tests.
+
+- [Docker](https://www.docker.com) for our containerization platform.
+
+## Architecture
+
+Before starting a project, I usually define a certain technical architecture as well as a data model.
+This will allow me to organize the code base well and have/keep good consistency.
+
+### Technical Structure
+
+The technical structure of the project is quite intuitive (division into layers/packages) and looks like this :
+
+- `config` that holds app configurations
+- `modules` that defines two modules
+  - `air-quality` module that handle operations related to air-quality data process
+  - `cron-jobs` module that handle project's cron jobs
+- `utils` contains utility classes
+- `common` contains shared elements (dtos, schemas, etc)
+
+## Tests
+
+Regarding the tests, I was able to implement some of them despite the time constraints. So you'll find :
+
+- For each module, tests for `controllers` and `services`
+- Integration or End To End (e2e) tests defined in the `test` directory at the root level of the project.
+
+## Usage
+
+🚨🚨🚨 First and foremost, you'll need to register on [iqair](https://www.iqair.com) and then after create your `API KEY` [here](https://www.iqair.com/fr/dashboard/api). 🚨🚨🚨 
+
+In order to set up & run this project, you can follow one of the two methods below :
+
+**[Side Note]** I'm a huge cloud native enthusiast and a big fan of `containers` and co, so each of the following methods uses `docker`.
+
+### Classic Setup
+
+- First, you'll need to spin up a `Mongo` database instance. To do so, run the following command in order to create
+  a fully configured one (you need to have `docker` installed on your system) :
 ```bash
-$ npm install
+docker run -d -p 27017:27017 --name air-quality-db mongo
 ```
 
-## Running the app
+- Then, rename the `.env.example` at the root level to simply `.env`
 
+- After that, you can update the `MONGO_URI` value by replace it with `mongodb://localhost:27017/air-quality`
+
+- Edit the `IQAIR_API_KEY` value by your `API KEY` previously created on [iqair](https://www.iqair.com/fr/dashboard/api)
+
+- Finally, you can launch the project by running the command below:
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm run start
 ```
 
-## Test
+- You can visit <http://localhost:3000/api/docs>.
 
+In order to run all unit tests, you can execute the following command :
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm run test
 ```
 
-## Support
+In order to run all integration/end2end tests, you can execute the following command :
+```bash
+npm run test:e2e
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+For cleaning your environment, you can run :
+```bash
+docker stop air-quality-db && docker rm air-quality-db
+```
 
-## Stay in touch
+### Docker Setup
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+The full docker setup will consist of a couple of steps :
 
-## License
+- First, rename the `.env.example` at the root level to simply `.env`
 
-Nest is [MIT licensed](LICENSE).
+- Edit the `IQAIR_API_KEY` value by your `API KEY` previously created on [iqair](https://www.iqair.com/fr/dashboard/api)
+
+- Spin up the application by running the following command :
+```bash
+docker-compose up -d
+```
+
+- You can visit <http://localhost:3000/api/docs>.
+
+For cleaning your environment, you can run :
+```bash
+docker-compose down
+```
+
+### Tests Results
+
+<table>
+<tr>
+    <th>Unit Tests</th>
+    <th>Integration Tests</th>
+</tr>
+    <tr>
+        <td><img src="screenshots/unit-tests.png" alt="unit-tests-restults"></td>
+        <td><img src="screenshots/e2e-tests.png" alt="e2e-tests-restults"></td>
+    </tr>
+</table>
+
+### API Documentation with Swagger
+
+A documentation of this backend REST API powered by `Swagger` is also available at <http://localhost:3000/api/docs>.
+
+![screenshot](screenshots/air-quality-swagger-ui.png)
+
+As you can see in the screenshot above, three main endpoints was exposed :
+
+- `/api/air-quality/zone` that return the air quality data of a given zone by providing its coordinates (latitude & longitude) in query params
+- `/api/air-quality/paris/most-polluted-time` that return the date and time where the Paris zone is most polluted
+- `/api/air-quality/paris` that return all Paris air quality data saved by the cron job which is executed every minutes
+
+## Author
+
+- [Meïssa B.C MBAYE](https://www.linkedin.com/in/meissa-bc-mbaye/)
