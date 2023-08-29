@@ -127,7 +127,7 @@ A documentation of this backend REST API powered by `Swagger` is also available 
 
 As you can see in the screenshot above, three main endpoints was exposed :
 
-- `/api/air-quality/zone` that return the air quality data of a given zone by providing its coordinates in query params
+- `/api/air-quality/zone` that return the air quality data of a given zone by providing its coordinates (latitude & longitude) in query params
 - `/api/air-quality/paris/most-polluted-time` that return the date and time where the Paris zone is most polluted
 - `/api/air-quality/paris` that return all Paris air quality data saved by the cron job which is executed every minutes
 
