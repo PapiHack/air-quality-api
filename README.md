@@ -13,6 +13,10 @@ Regarding the stack, you'll find:
 
 - [Mongoose](https://mongoosejs.com) an elegant mongodb object modeling for node.js, as our Object Document Mapper. 
 
+- [Jest](https://jestjs.io) for unit tests.
+
+- [SuperTest](https://github.com/ladjs/supertest) for integration tests.
+
 - [Docker](https://www.docker.com) for our containerization platform.
 
 ## Architecture
