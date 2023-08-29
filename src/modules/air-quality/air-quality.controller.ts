@@ -2,12 +2,12 @@ import { Controller, Get, Query } from '@nestjs/common';
 import { AirQualityService } from './air-quality.service';
 import { AirQualityByZoneDTO } from './dtos/air-quality.dto';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { PaginationQueryDTO } from 'src/common/dto/pagination-query.dto';
+import { PaginationQueryDTO } from '../../common/dto/pagination-query.dto';
 import {
   AirQualityZoneResultSwaggerSchema,
   DateTimeSwaggerSchema,
   SavedAirQualitySwaggerSchema,
-} from 'src/common/schemas/custom-swagger-schema';
+} from '../../common/schemas/custom-swagger-schema';
 
 @Controller('air-quality')
 @ApiTags('air-quality')

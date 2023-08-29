@@ -2,15 +2,15 @@ import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { HttpService } from '@nestjs/axios';
 import { InjectModel } from '@nestjs/mongoose';
-import { FilterQuery, Model } from 'mongoose';
+import { Model } from 'mongoose';
 import { throwError } from 'rxjs';
 import {
   AirQualityByZoneDTO,
   AirQualityZoneResultDTO,
 } from './dtos/air-quality.dto';
-import { Utils } from 'src/utils/utils';
+import { Utils } from '../../utils/utils';
 import { AirQualityZoneResult } from './models/air-quality-zone-result.entity';
-import { PaginationQueryDTO } from 'src/common/dto/pagination-query.dto';
+import { PaginationQueryDTO } from '../../common/dto/pagination-query.dto';
 
 @Injectable()
 export class AirQualityService {

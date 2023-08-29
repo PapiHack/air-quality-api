@@ -6,6 +6,9 @@ export default () => ({
   db: {
     uri: process.env.MONGO_URI,
   },
+  api: {
+    prefix: process.env.API_PREFIX,
+  },
   iqair: {
     apiKey: process.env.IQAIR_API_KEY,
     apiUrl: process.env.IQAIR_API_URL,
