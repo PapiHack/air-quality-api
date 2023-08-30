@@ -34,6 +34,19 @@ describe('AppController (e2e)', () => {
       .expect(200)
       .expect({ message: 'Service is healthy !' });
   });
+});
+
+describe('AirQualityController (e2e)', () => {
+  let app: INestApplication;
+
+  beforeEach(async () => {
+    const moduleFixture: TestingModule = await Test.createTestingModule({
+      imports: [AppModule],
+    }).compile();
+
+    app = moduleFixture.createNestApplication();
+    await app.init();
+  });
 
   it('/api/air-quality/zone (GET)', () => {
     return request(app.getHttpServer())
