@@ -1,3 +1,14 @@
+export const AirQualityDataSwaggerSchema = {
+  type: 'object',
+  properties: {
+    ts: { type: 'string' },
+    aqius: { type: 'number' },
+    mainus: { type: 'string' },
+    aqicn: { type: 'number' },
+    maincn: { type: 'string' },
+  },
+};
+
 export const AirQualityZoneResultSwaggerSchema = {
   type: 'object',
   properties: {
@@ -5,14 +16,7 @@ export const AirQualityZoneResultSwaggerSchema = {
       type: 'object',
       properties: {
         Pollution: {
-          type: 'object',
-          properties: {
-            ts: { type: 'string' },
-            aqius: { type: 'number' },
-            mainus: { type: 'string' },
-            aqicn: { type: 'number' },
-            maincn: { type: 'string' },
-          },
+          ...AirQualityDataSwaggerSchema,
         },
       },
     },
@@ -30,13 +34,6 @@ export const DateTimeSwaggerSchema = {
 export const SavedAirQualitySwaggerSchema = {
   type: 'array',
   items: {
-    type: 'object',
-    properties: {
-      ts: { type: 'string' },
-      aqius: { type: 'number' },
-      mainus: { type: 'string' },
-      aqicn: { type: 'number' },
-      maincn: { type: 'string' },
-    },
+    ...AirQualityDataSwaggerSchema,
   },
 };
